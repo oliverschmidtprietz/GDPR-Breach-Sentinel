@@ -1,0 +1,142 @@
+{
+  "skill_name": "gdpr-breach-sentinel-oliver-schmidt-prietz",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We had a misdirected email incident yesterday. One of our HR staff accidentally sent a single email containing an employee's name and office phone number to the wrong internal colleague. The email was recalled within 10 minutes and the recipient confirmed they didn't read it. We're a German company based in Munich (controller). I acknowledge the disclaimer and we're not in an emergency. Let's use guided mode. Here are the facts: Controller only. T0 was yesterday at 14:30 CET. Confidentiality breach only. Data involved: employee name and office phone extension. 1 person affected. Identifiers: full name + internal phone extension. No encryption relevant (it was email). Accidental, not malicious. No cross-border element - all in Germany. No special DPA deadline. No AI system involved.",
+      "expected_output": "LOW severity assessment (SE < 2.0), internal log only, no SA notification required. Should match EDPB Case 13 (misdirected email). DPC should be 1 (simple contact data), EI should be low (limited identifiability from office extension alone).",
+      "files": [],
+      "expectations": [
+        "Assessment uses ENISA formula SE = (DPC × EI) + CB explicitly with numeric scores shown for each component",
+        "DPC is stated as numeric value 1 (simple personal data - name and office phone)",
+        "Final SE score is computed as a number below 2.0, and the arithmetic is consistent (DPC × EI + CB = stated SE value)",
+        "Concludes NO SA notification required - internal log only under Art. 33(5)",
+        "References EDPB Case 13 or Case 14 by number (misdirected email/postal scenarios)",
+        "Identifies the relevant SA as BayLDA (Bavarian DPA) for a Munich-based private company, not BfDI",
+        "Produces an Assessment Dashboard with the structured format including Role, Breach Type, T0, Clock Status, Severity Calculation, and Legal Verdict sections",
+        "Offers to generate audit-ready documentation (at minimum the Internal Compliance Log)",
+        "Calculates remaining hours on the 72-hour notification clock from the stated T0"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "URGENT: We've been hit by ransomware. Our hospital's patient management system was encrypted 6 hours ago and we've now confirmed data exfiltration - the attackers posted a sample of patient records on their leak site including ICD-10 diagnosis codes, full patient names, dates of birth, and German health insurance numbers (Krankenversichertennummer). We estimate approximately 15,000 patients are affected across our 3 clinics in Nordrhein-Westfalen. We're the controller. I acknowledge the disclaimer. We are NOT yet in emergency mode (we have 66 hours left). Let's use guided mode. The data was not encrypted at rest. This is clearly malicious. All patients are in Germany, no cross-border. No special DPA deadline. No AI system involved.",
+      "expected_output": "VERY HIGH severity (SE ≥ 4.0). Must notify SA under Art. 33 AND data subjects under Art. 34. DPC should be 4 (Art. 9 health data - ICD-10 codes). High EI due to direct identifiers. CB elevated by malicious intent + confidentiality loss. Should flag SCALE (15,000 subjects) and VULNERABLE (patients). Should match EDPB Case 01 or similar ransomware-with-exfiltration case.",
+      "files": [],
+      "expectations": [
+        "DPC is stated as numeric value 4 (Art. 9 special category health data due to ICD-10 diagnosis codes)",
+        "EI is stated as numeric value 0.75 or 1.00 (significant or maximum - direct identifiers: name, DOB, insurance number)",
+        "CB is stated as a numeric sum that includes +0.50 for malicious intent and +0.25 or +0.50 for confidentiality loss",
+        "Final SE score is computed as a number ≥ 4.0, and the arithmetic is consistent (DPC × EI + CB = stated SE value)",
+        "Explicitly states both Art. 33 SA notification AND Art. 34 data subject notification are required",
+        "Applies labeled SCALE flag (15,000 > 100 subjects) and labeled VULNERABLE flag (patients) — not just discussion of scale, but explicit flag labels",
+        "References EDPB ransomware cases by number (Cases 01-04), specifically a case with exfiltration",
+        "Identifies LDI NRW (Landesbeauftragte für Datenschutz NRW) as the relevant SA",
+        "Strategic advisory addresses the unencrypted Art. 9 data as a key vulnerability the SA will scrutinize",
+        "Mitigation playbook includes forensics-first actions appropriate for active ransomware with confirmed exfiltration"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I'm the DPO at a cloud hosting provider (we're a processor). One of our storage nodes had a misconfiguration that exposed a client's customer database for approximately 48 hours before we detected it. The database contained names, email addresses, and purchase histories of about 3,000 individuals. Our client is a French e-commerce company. We discovered this 4 hours ago. Our DPA with the client specifies a 24-hour notification window. I acknowledge the disclaimer, no emergency, guided mode please. We are processor only. T0 is 4 hours ago. Confidentiality breach. Data: names, emails, purchase history. 3,000 affected. Identifiers: names + email addresses. Data was not encrypted. Accidental misconfiguration. The client's customers are primarily in France but some across the EU. The DPA specifies 24h notification to controller. No AI system.",
+      "expected_output": "Processor track (Track B) - must notify controller within 24h DPA deadline. No direct SA notification by processor. Should calculate severity for informational purposes but emphasize processor's obligation is to notify controller, not to make the SA notification decision. Should flag the 24h DPA deadline as primary obligation and note 20 hours remaining.",
+      "files": [],
+      "expectations": [
+        "Correctly identifies Track B (Processor) - obligation is to notify the controller, NOT the SA directly",
+        "Highlights the 24-hour DPA contractual deadline as the primary obligation with remaining time calculated (20 hours remaining)",
+        "Calculates two T0 timestamps: processor T0 (4 hours ago) and notes controller T0 starts upon receiving notification",
+        "Still performs ENISA severity calculation with numeric DPC, EI, CB, and SE values for informational purposes",
+        "Does NOT instruct the processor to notify the SA - that decision belongs to the controller",
+        "References the 48-hour exposure window as relevant context for the controller's assessment",
+        "Assessment Dashboard shows Role as Processor with DPA Deadline section populated",
+        "Mentions that the controller (French company) will likely need to notify CNIL"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "One of our employees lost their company laptop on public transport in Berlin yesterday. The laptop contains an encrypted hard drive (AES-256, BitLocker) and the decryption key is stored only in our MDM system - not on the device itself. The laptop had about 200 customer contact records (names, company emails, phone numbers) in a local CRM cache. Remote wipe was initiated within 2 hours but we can't confirm it succeeded since the laptop hasn't connected to the internet. We're a controller, German company in Berlin. I acknowledge the disclaimer, no emergency, fast path mode.",
+      "expected_output": "LOW severity due to encryption. The AES-256 encryption with separately stored key should bring this to LOW even though device is lost. Should match EDPB Case 10 or 11 (stolen/lost device with encryption). Internal log required but likely no SA notification needed. Should note the caveat about unconfirmed remote wipe.",
+      "files": [],
+      "expectations": [
+        "Extracts all 11 data points from the fast path description without requiring additional guided questions",
+        "Applies the labeled ENCRYPTED flag and recognizes AES-256 with separately stored key as strong encryption",
+        "DPC is stated as numeric value 1 (simple contact data - names, business emails, phone numbers)",
+        "EI is stated as a reduced numeric value due to encryption (0.25 or 0.50 - negligible or limited since data is encrypted)",
+        "Final SE score is computed as a number below 2.0, and the arithmetic is consistent (DPC × EI + CB = stated SE value)",
+        "Concludes internal log only - no SA notification required, citing the encryption as the key mitigating factor",
+        "References EDPB Case 10, 11, or 12 by number (lost/stolen devices scenarios)",
+        "Notes the unconfirmed remote wipe as a risk factor and recommends monitoring for device reconnection",
+        "Identifies BlnBDI (Berliner Beauftragte für Datenschutz) as the relevant SA for a Berlin-based company"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "We had a data breach at our SaaS platform that serves customers across the EU. An SQL injection attack compromised our user database containing usernames, hashed passwords (bcrypt), email addresses, and billing addresses. We've confirmed affected users in Germany (8,000), France (5,000), Netherlands (3,000), and Spain (2,000). Our main establishment is in Amsterdam where our CEO and central administration are based. We also have offices in Berlin and Paris. We're the controller. I acknowledge the disclaimer, no emergency, fast path. T0 was 10 hours ago. Confidentiality and integrity breach. 18,000 total affected. Malicious (SQL injection). No AI system. No special DPA deadlines.",
+      "expected_output": "MEDIUM to HIGH severity. Cross-border breach requiring Lead SA determination. Should identify the Dutch AP (Autoriteit Persoonsgegevens) as Lead SA based on main establishment in Amsterdam. One-stop-shop mechanism applies. Should flag CROSS-BORDER and SCALE. Bcrypt hashing should be noted as partial mitigation but not equivalent to encryption.",
+      "files": [],
+      "expectations": [
+        "Applies labeled CROSS-BORDER flag and correctly invokes the one-stop-shop mechanism (Art. 56) — not just discussion, but explicit flag label",
+        "Determines the Dutch Autoriteit Persoonsgegevens (AP) as Lead SA based on main establishment in Amsterdam",
+        "Does NOT instruct notification to each individual SA - only the Lead SA with affected Member States indicated",
+        "DPC is stated as numeric value 2 (behavioral data: billing addresses + login credentials; not 3 unless specific justification provided for financial classification)",
+        "CB is stated as a numeric sum that includes +0.50 for malicious intent and scores for both confidentiality and integrity loss",
+        "Notes that bcrypt-hashed passwords provide partial protection but are not equivalent to full encryption",
+        "Applies labeled SCALE flag for 18,000 affected individuals — explicit flag label, not just mention of count",
+        "Assessment Dashboard includes all affected Member States (DE, FR, NL, ES)",
+        "Calculates remaining time from T0 (10 hours ago, so ~62 hours remaining of 72h)"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "EMERGENCY! We discovered a breach 64 hours ago and we've been investigating but just realized we need to notify. A disgruntled former employee downloaded our entire HR database before their access was revoked. The database contains employee names, home addresses, salaries, bank account numbers (IBANs), and tax IDs for 450 current and former employees. We're a medium-sized company in Hamburg. We're the controller. I acknowledge the disclaimer. YES we are in a time-critical situation - we have less than 8 hours remaining!",
+      "expected_output": "Should activate EMERGENCY MODE. Only 8 hours remaining on 72h clock. Must use abbreviated 7-question intake. Should produce a rapid assessment (likely HIGH or VERY HIGH given financial data + malicious insider) and generate minimum viable Art. 33 notification immediately. Should flag the delayed discovery as a risk factor the SA will scrutinize.",
+      "files": [],
+      "expectations": [
+        "Activates EMERGENCY MODE with the emergency banner displayed",
+        "Uses the abbreviated 7-question emergency intake, NOT the full 11-question guided mode",
+        "Performs rapid ENISA calculation with numeric scores: DPC 3 (financial - salary, IBAN, tax ID), EI stated numerically, CB includes malicious intent as +0.50",
+        "Final SE score is computed as a number ≥ 3.0, classified as HIGH or VERY HIGH",
+        "States Art. 33 SA notification is required AND Art. 34 subject notification is required (financial data + malicious intent = high risk to individuals)",
+        "Calculates remaining time on the 72-hour clock (approximately 8 hours remaining) and emphasizes the urgency",
+        "Addresses the 64-hour delay in notification - flags this as a compliance risk the SA will likely question",
+        "Recommends phased notification under Art. 33(4) given the time pressure",
+        "Offers to generate a minimum viable Art. 33 notification document immediately",
+        "Identifies HmbBfDI (Hamburgische Beauftragte für Datenschutz) as the relevant SA for a Hamburg-based company"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "We operate an AI-powered medical diagnosis assistant (classified as high-risk under AI Act Annex III) deployed in hospitals across Bavaria. We discovered that an adversarial attack caused the system to leak patient diagnostic data through its API responses for approximately 6 hours. The leaked data includes AI-generated diagnostic suggestions linked to patient names and dates of birth - about 800 patients affected. The AI model itself may have been compromised (we're still investigating potential model poisoning). We're the provider and controller. I acknowledge the disclaimer, no emergency, guided mode. T0 was 18 hours ago. Confidentiality breach confirmed, integrity under investigation. Data: AI diagnostic outputs + patient identifiers. 800 patients. Direct identifiers (name + DOB). No encryption on API responses. Malicious adversarial attack. All in Bavaria. No special DPA deadline. YES, AI system is involved - it's a high-risk medical AI under Annex III.",
+      "expected_output": "Should trigger BOTH GDPR and AI Act assessments. GDPR: HIGH or VERY HIGH severity (Art. 9 health data + malicious attack). AI Act: Art. 62 serious incident reporting required for high-risk system. Should flag dual reporting obligations running in parallel. AI SYSTEM flag should be set.",
+      "files": [],
+      "expectations": [
+        "Sets the labeled AI SYSTEM flag and performs the AI Act intersection check (Art. 62)",
+        "Correctly identifies this as a high-risk AI system under Annex III of the AI Act",
+        "Determines Art. 62 serious incident reporting IS required (health damage potential from compromised diagnostics)",
+        "States GDPR and AI Act reporting obligations run in parallel with separate timelines (72h for GDPR Art. 33, 15 days for AI Act Art. 62)",
+        "DPC is stated as numeric value 4 (Art. 9 health data - AI diagnostic suggestions are health data)",
+        "Final SE score is computed as a number ≥ 3.0, classified as HIGH or VERY HIGH, with arithmetic shown",
+        "Assessment Dashboard includes the AI ACT STATUS section with Art. 62 reporting status",
+        "Identifies BayLDA as the relevant GDPR SA and mentions market surveillance authority for AI Act reporting",
+        "Addresses the ongoing investigation (potential model poisoning) and recommends phased notification under Art. 33(4)"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "I'm the DPO at a large Austrian insurance company headquartered in Vienna. We act as both controller for policyholder data and processor for reinsurance partners. Here's what happened: A backup tape containing policyholder records was sent to our off-site storage facility but never arrived. The tape contains 45,000 policyholder records including names, addresses, policy numbers, health declarations (for life insurance), and claims history going back 5 years. The tape was AES-256 encrypted but we've now discovered the encryption key was printed on a label attached to the tape case (standard practice that we're now reviewing). T0 was 30 hours ago. Breach types: Confidentiality (tape lost) and Availability (backup gap). Malicious intent: unknown - could be lost in transit or stolen. Cross-border: policyholders primarily in Austria but some in Germany and Czech Republic. DPA with reinsurance partners requires 48h notification. The AI system question: no AI involved. I acknowledge the disclaimer, no emergency, fast path please.",
+      "expected_output": "Should handle the dual role (controller + processor / hybrid Track A+B). MEDIUM to HIGH severity despite encryption because the encryption key was on the tape label (rendering encryption ineffective). Should flag the encryption key management failure prominently. Cross-border with Austria as lead. Large scale (45,000). Health declarations = Art. 9 data.",
+      "files": [],
+      "expectations": [
+        "Identifies Hybrid track (A+B) - controller for policyholder data AND processor for reinsurance partners",
+        "Runs parallel Track A (controller obligations to SA) and Track B (processor notification to reinsurance partners within 48h DPA deadline)",
+        "Recognizes that encryption is INEFFECTIVE because the key was on the tape label - does NOT apply the ENCRYPTED flag as mitigating",
+        "DPC is stated as numeric value 4 (Art. 9 data due to health declarations for life insurance)",
+        "Applies labeled SCALE flag (45,000 subjects) and labeled CROSS-BORDER flag — explicit flag labels in output, not just discussion of scale or cross-border elements",
+        "Determines Austrian DSB (Datenschutzbehörde) as Lead SA under one-stop-shop mechanism",
+        "Final SE score is computed as a number, classified as HIGH or VERY HIGH given ineffective encryption, Art. 9 data, and scale",
+        "Strategic advisory addresses the encryption key management failure as a systemic Art. 32 concern",
+        "Notes the availability breach component (backup gap) as a separate risk factor alongside confidentiality"
+      ]
+    }
+  ]
+}

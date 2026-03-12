@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 2026.02.09
+  version: 2026.03.12
 ---
 
 # GDPR Breach Response Sentinel
@@ -277,28 +277,7 @@ Output format:
 
 ## Dynamic Web Research Module
 
-After completing the ENISA calculation and EDPB case matching, **automatically** perform targeted web research to enrich the assessment. Use web_search to find:
-
-### Research Queries (run these in sequence, using specific case details)
-
-Construct targeted queries using the specific details of the breach. Generic queries yield generic results — specificity is key.
-
-1. **Recent enforcement:** Search for `"[specific SA name]" breach fine [specific data category] [year]` — e.g., `"BayLDA" breach fine health data 2025` rather than just `GDPR breach notification fine`. If the sector is known, include it: `"CNIL" fine [sector] data breach [year]`.
-2. **SA-specific guidance:** Search for `"[specific SA name]" breach notification guidance requirements [year]` — e.g., `"LfDI Baden-Württemberg" breach notification requirements 2025`. Include the SA's local language name if relevant.
-3. **Sector-specific precedent:** Search for `GDPR [specific sector] [specific data type] breach enforcement [year]` — e.g., `GDPR healthcare patient records breach enforcement 2025` rather than just `GDPR healthcare data breach enforcement`.
-4. **EDPB updates:** Search for `EDPB guidelines data breach notification [year]` to check for any updates to guidance since the skill's reference documents were created.
-5. **AI Act incidents** (if AI flag set): Search for `EU AI Act serious incident reporting Article 62 [year]` for latest implementation guidance.
-6. **Damages precedent** (if subject notification likely): Search for `GDPR data breach damages claim [specific data type] [jurisdiction] [year]` — e.g., `GDPR health data breach damages claim Germany 2025` to inform the Strategic Advisory on litigation risk.
-
-### How to Use Research Results
-
-- **Enforcement precedents**: Reference relevant SA decisions to contextualize the risk level. Example: "The Spanish AEPD fined [Company] €X for a similar [breach type] in [year], highlighting that [specific factor] was considered an aggravating circumstance."
-- **Updated guidance**: If EDPB has issued new guidelines or opinions since the reference documents, note them and explain how they might affect the assessment.
-- **Sector trends**: Flag if the user's sector has been subject to heightened SA scrutiny recently.
-- **Caveat all research**: Clearly label web-sourced information as supplementary context, not as the basis for the formal ENISA/EDPB assessment.
-
-### Output Section
-Add a "Regulatory Intelligence" section to the Assessment Dashboard summarizing key findings.
+After completing the ENISA calculation and EDPB case matching, **automatically** perform targeted web research to enrich the assessment. Read [references/web-research.md](references/web-research.md) for specific query templates (enforcement precedents, SA-specific guidance, sector trends, EDPB updates, AI Act, damages precedent) and how to incorporate findings. Add a "Regulatory Intelligence" section to the Assessment Dashboard.
 
 ---
 
@@ -338,50 +317,9 @@ Output the SA contact details in the Assessment Dashboard.
 
 ## Mitigation Playbook
 
-After the risk assessment, generate a **tailored mitigation playbook** specific to the incident. Do NOT use a rigid template structure. Instead, analyze the concrete breach scenario — its type, attack vector, data involved, organizational context, and urgency — and generate the response actions that actually matter for THIS case.
+After the risk assessment, generate a **tailored mitigation playbook** specific to the incident — not a generic checklist but case-driven actions that actually matter for THIS breach.
 
-### Playbook Design Principles
-
-1. **Case-driven, not category-driven.** Don't mechanically separate into "technical" vs "organizational" or "immediate" vs "long-term" unless that structure genuinely fits. Some incidents need a forensics-first approach; others need a communications-first approach; others need a legal-first approach. Structure the playbook around what matters most.
-
-2. **Prioritize by impact, not by convention.** The first actions should be whatever stops the bleeding for THIS specific breach — not a generic "isolate systems" checklist. If the attacker is already gone and the data is already exfiltrated, network isolation is less critical than understanding what was taken and who's at risk.
-
-3. **Be specific.** Instead of "review access controls," say "audit all database accounts with read access to the [specific system], revoke service accounts that haven't been used in 90+ days, and enforce MFA on all remaining accounts." Tailor every action to the facts.
-
-4. **Include the WHY.** For each action, briefly explain why it matters for this case. This helps the incident response team prioritize when resources are limited.
-
-5. **Account for dependencies.** Some actions block others. If forensic imaging must happen before system changes, say so explicitly. If notification drafting can run in parallel with technical containment, say that too.
-
-6. **Think about what the SA will ask.** Frame remedial measures in terms of what a supervisory authority will want to see documented. SAs frequently ask: "What did you do immediately? Why didn't you do X? What have you changed to prevent recurrence?"
-
-### Playbook Output Format
-
-Present the playbook as a prioritized, sequenced action plan with:
-- **Action item** — specific, concrete, and tailored to the case
-- **Rationale** — why this matters for this specific breach
-- **Priority** (Critical / High / Medium)
-- **Owner** (specific role, not just "IT")
-- **Deadline** (relative to T0, realistic for the action)
-- **Dependencies** (what must happen first, or what can run in parallel)
-- **Status** field (Pending / In Progress / Complete)
-
-Group actions in whatever structure best fits the case — this might be by workstream (Forensics / Legal / Communications / Hardening), by timeline, by system, or by stakeholder. Choose the structure that makes the playbook most actionable for the user's situation.
-
-### Reference: Common Action Categories
-
-Draw from these as relevant — but only include what applies to the specific case, and always customize:
-
-**Containment & Forensics:** System isolation, credential revocation, evidence preservation, IOC sweeps, access log audits, attack vector analysis, lateral movement assessment
-
-**Data & Impact Scoping:** Identifying exactly what data was compromised, mapping affected individuals, assessing downstream risks (identity theft, discrimination, blackmail, financial fraud)
-
-**Legal & Regulatory:** SA notification preparation, subject notification drafting, law enforcement engagement, legal privilege considerations, DPA contractual obligation review, insurance notification
-
-**Communication:** Internal stakeholder briefing, employee/works council communication, customer communication, media response preparation, support channel setup for affected individuals
-
-**Hardening & Prevention:** Vulnerability remediation, encryption implementation, access control tightening, monitoring enhancement, detection rule creation, security architecture review
-
-**Governance & Documentation:** Root cause analysis, DPIA review/update, Art. 30 records update, incident response procedure revision, training needs assessment, lessons learned documentation
+Read [references/mitigation-playbook.md](references/mitigation-playbook.md) for the full playbook design principles, output format (prioritized action plan with owner/deadline/dependencies), and common action categories to draw from.
 
 ---
 
@@ -453,71 +391,9 @@ If user disagrees with calculated severity:
 
 ## Strategic Case Advisory
 
-After presenting the Assessment Dashboard, shift into a different mode: **act as a senior strategic advisor** — a seasoned data protection lawyer with deep cybersecurity expertise who has handled hundreds of breach cases across jurisdictions.
+After presenting the Assessment Dashboard, deliver a strategic advisory as a senior data protection lawyer briefing the client's crisis team. This goes beyond the ENISA score — it's what separates competent compliance from excellent incident response.
 
-This section goes beyond the ENISA score and EDPB case match. The formal assessment gives the user the regulatory baseline. The Strategic Advisory gives them the insight that separates competent compliance from excellent incident response.
-
-### Advisory Principles
-
-1. **Think like the SA, then think like opposing counsel.** Anticipate what questions the supervisory authority will ask. Then anticipate what a plaintiff's lawyer will argue in a damages claim. Advise the user to prepare for both.
-
-2. **Identify the non-obvious risks.** Every breach has surface-level risks (the data was exposed) and deeper risks that emerge over time. Flag risks the user might not see: secondary data inference, chaining with other public data, reputational cascading effects, employee trust erosion, works council implications, insurance coverage gaps.
-
-3. **Spot the leverage points.** What can the user do RIGHT NOW that will disproportionately improve their position? Sometimes it's the speed of notification. Sometimes it's the quality of the subject communication. Sometimes it's a specific technical measure that demonstrates Art. 32 compliance. Identify the 2-3 highest-leverage moves.
-
-4. **Be direct about weaknesses.** If the user's security posture has obvious gaps (like unencrypted Art. 9 data), don't soften this. Name it clearly, explain why it's a problem from the SA's perspective, and advise on how to address it in the notification without creating unnecessary legal exposure.
-
-5. **Provide strategic framing for the SA notification.** How should the user frame the incident in their Art. 33 notification? What tone, what emphasis, what level of detail? Advise on the narrative arc: what happened, why it matters, what the user is doing about it, and what has changed to prevent recurrence.
-
-6. **Consider the human dimension.** Data subjects are real people. Advise on what they actually need to hear, not just what Art. 34 requires. A well-crafted subject notification that gives people genuine, actionable guidance builds trust. A legalistic form letter destroys it.
-
-### Advisory Structure
-
-Present the strategic advisory as a narrative — not tables, not checklists. Write it as if a senior partner at a top-tier data protection firm were briefing the client's crisis team in person. The tone should be:
-- Confident and direct
-- Practical (no academic hedging)
-- Specific to this case (no generic advice)
-- Honest about risks and uncertainties
-- Forward-looking (what happens in 30 days, 6 months, 2 years?)
-
-### Advisory Sections
-
-Cover the following, tailored to the specific case:
-
-**Case Assessment & Risk Landscape**
-Go beyond the ENISA score. What makes this case particularly sensitive or, conversely, more manageable than the numbers suggest? What are the real-world consequences for the affected individuals? What are the reputational implications? Are there sector-specific considerations? Employment law intersections? Works council involvement? Criminal law dimensions?
-
-**SA Interaction Strategy**
-How should the user approach the supervisory authority? Proactive and transparent, or factual and measured? What level of detail should the initial notification include vs. what should be reserved for supplementary filings? Are there SA-specific expectations or preferences to be aware of? How to handle the likely follow-up questions?
-
-**Notification Drafting Guidance**
-Specific advice on crafting both the SA notification and the subject communication. What tone works best? What details to include vs. omit? How to describe remedial measures persuasively without overpromising? How to handle the balance between transparency and legal exposure? How to make the subject notification genuinely useful rather than merely compliant?
-
-**Hidden Risks & Second-Order Effects**
-What risks might emerge in 30 days, 6 months, or 2 years? Could this data appear on dark web marketplaces? Could affected employees file individual claims? Could a works council demand organizational changes? Could this trigger a broader SA audit beyond the breach itself? Could class action litigation emerge? Are there insurance implications?
-
-**Defensive Documentation**
-What documentation should the user create NOW that will help if this case is later scrutinized? What does a well-documented breach response look like from the SA's perspective? What evidence of "accountability" (Art. 5(2)) should be preserved?
-
-**Competitive Advantage in Crisis**
-How can the user turn this incident into an opportunity to strengthen their data protection posture? What investments or changes would both address this breach AND create lasting compliance improvements? How can the response demonstrate organizational maturity to the SA?
-
-### Advisory Tone Examples
-
-**Good (specific, direct, strategic):**
-> "The fact that ICD-10 codes were stored unencrypted alongside full employee identifiers is your biggest vulnerability in this case. The LfDI will almost certainly ask why Art. 9 data wasn't encrypted at rest — that's a question you need a convincing answer to before you file. I'd recommend framing your notification around what you're changing: 'We have identified that our encryption posture for health data did not meet the standard we now recognize is required, and we have already initiated [specific measure].' This shows accountability without unnecessary self-incrimination."
-
-**Bad (generic, hedging, template-like):**
-> "You should consider implementing encryption for sensitive data and ensure compliance with Art. 32 GDPR requirements for technical and organizational measures."
-
-### Web Research for Advisory
-
-Use web_search to enrich the strategic advisory with:
-- Recent SA enforcement decisions involving similar breach patterns
-- Court rulings on data subject damages claims for similar data types
-- Industry-specific best practice guidance
-- Dark web monitoring trends for the specific data type involved
-- Works council / labor law implications if employee data is involved
+Read [references/strategic-advisory.md](references/strategic-advisory.md) for the full advisory framework, principles, section structure, and tone examples. Cover: Case Assessment & Risk Landscape, SA Interaction Strategy, Notification Drafting Guidance, Hidden Risks & Second-Order Effects, Defensive Documentation, and Competitive Advantage in Crisis.
 
 ---
 
@@ -536,66 +412,13 @@ After completing the assessment, offer to generate **audit-ready .docx documents
 
 ### Document Generation Process
 
-To generate documents:
-
-1. **Locate the docx skill:** Check for a docx generation skill in the available environment. Common paths include `/mnt/skills/public/docx/SKILL.md` (Claude.ai Projects) or the `docx-processing-anthropic` skill (Claude Code). If no docx skill is available, fall back to generating well-formatted **Markdown (.md) files** as an alternative, and inform the user that .docx generation requires the docx skill to be installed.
-2. Read the templates: [references/templates.md](references/templates.md)
-3. Generate each document as a properly formatted .docx file (or .md fallback) with:
-   - Professional formatting (headers, tables, page numbers)
-   - Pre-filled values from the assessment
-   - Clear placeholder markers `[TO BE COMPLETED]` for information the user needs to add
-   - Disclaimer footer on every page
-   - Document metadata (date, incident reference, version)
-4. Save to `/mnt/user-data/outputs/` and present to user
-
-### Document Formatting Standards
-- **Paper size:** A4 (standard for EU documents)
-- **Font:** Arial 11pt body, headings proportionally larger
-- **Header:** "CONFIDENTIAL — [Document Type] — [Incident Reference]"
-- **Footer:** "Generated with GDPR Breach Response Sentinel — Does not constitute legal advice — Page X of Y"
-- **Date format:** ISO 8601 (YYYY-MM-DD) in structured fields; localized where appropriate
+Read [references/templates.md](references/templates.md) for document templates and formatting standards (A4, Arial 11pt, headers/footers, ISO 8601 dates). Check for a docx generation skill (`docx-processing-anthropic` in Claude Code, or `/mnt/skills/public/docx/SKILL.md` in Claude.ai Projects). Fall back to Markdown if unavailable. Pre-fill values from the assessment; mark gaps with `[TO BE COMPLETED]`.
 
 ---
 
 ## Post-Notification Tracking
 
-After the initial assessment and notification, the skill supports ongoing case management.
-
-### Tracking Dashboard
-
-```
-╔══════════════════════════════════════════════════════════════╗
-║              POST-NOTIFICATION TRACKER                        ║
-╠══════════════════════════════════════════════════════════════╣
-║ Incident Reference: [ID]                                     ║
-║ Date of Initial Assessment: [Date]                           ║
-╠══════════════════════════════════════════════════════════════╣
-║ SA NOTIFICATION                                              ║
-║ ☐ Initial notification submitted    Due: [Date] Status: [ ]  ║
-║ ☐ SA acknowledgment received        Status: [ ]              ║
-║ ☐ Supplementary information sent    Due: [Date] Status: [ ]  ║
-║ ☐ SA inquiry response (if any)      Due: [Date] Status: [ ]  ║
-╠══════════════════════════════════════════════════════════════╣
-║ DATA SUBJECT NOTIFICATION                                    ║
-║ ☐ Communication drafted             Status: [ ]              ║
-║ ☐ Communication sent                Date: [ ]                ║
-║ ☐ Subject inquiries tracked         Count: [ ]               ║
-╠══════════════════════════════════════════════════════════════╣
-║ MITIGATION EXECUTION                                         ║
-║ ☐ Phase 1 (Immediate) complete      Due: T0+4h   Status: [ ]║
-║ ☐ Phase 2 (Technical) complete      Due: T0+72h  Status: [ ]║
-║ ☐ Phase 3 (Organizational) complete Due: T0+30d  Status: [ ]║
-╠══════════════════════════════════════════════════════════════╣
-║ DOCUMENTATION                                                ║
-║ ☐ Internal Compliance Log finalized Status: [ ]              ║
-║ ☐ Root cause analysis completed     Status: [ ]              ║
-║ ☐ Lessons learned documented        Status: [ ]              ║
-║ ☐ DPIA update (if required)         Status: [ ]              ║
-║ ☐ Art. 30 records updated           Status: [ ]              ║
-╚══════════════════════════════════════════════════════════════╝
-```
-
-### Follow-Up Prompts
+After the initial assessment, offer ongoing case management. Read [references/post-notification-tracking.md](references/post-notification-tracking.md) for the tracking dashboard template covering SA notification status, subject communication, mitigation execution phases, and documentation completion.
 
 At the end of each session, remind the user:
 - "Would you like me to generate any documentation as .docx files?"
