@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 2026.03.12
+  version: 2.2
 ---
 
 # GDPR Breach Response Sentinel

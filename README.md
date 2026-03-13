@@ -1,7 +1,7 @@
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Agent Skill](https://img.shields.io/badge/Agent_Skill-Open_Standard-orange)](https://agentskills.io)
 
-# Breach Sentinel v2.2
+# Breach Sentinel
 
 **GDPR Breach Response Sentinel** — an [Agent Skill](https://agentskills.io) that provides expert-level Art. 33/34 breach assessment and notification support.
 
@@ -44,6 +44,7 @@ See [agentskills.io](https://agentskills.io) for a full list of compatible tools
 ```
 GDPR-Breach-Sentinel/
 ├── SKILL.md                              # Main skill instructions
+├── CHANGELOG.md                          # Version history
 ├── LICENSE                               # AGPL-3.0
 ├── evals/
 │   └── evals.json                        # 8 test cases, 73 assertions
@@ -111,14 +112,7 @@ The skill will activate and walk you through the assessment.
 | ENISA Severity Methodology | Risk assessment formula and scoring |
 | EU AI Act (Reg. 2024/1689) | Art. 62 serious incident reporting |
 
-## Version History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | — | Initial release: ENISA assessment, EDPB matching, templates |
-| 2.0 | 2026-02-07 | Fast Path intake, Strategic Advisory, flexible mitigation playbooks, dynamic web research, SA contact lookup, AI Act integration, DPA deadline tracking, .docx generation, post-notification tracking, borderline score analysis |
-| 2.1 | 2026-02-09 | DPC score capping, Fast Path 11 data points, Emergency Mode DPA deadline, multi-select breach types, UK GDPR nuances, "Under Investigation" pathway, sub-processor chain guidance, two-stage T0 analysis, docx skill fallback, quick decision tree, improved web research queries |
-| 2.2 | 2026-03-12 | Structural refactor: SKILL.md trimmed 670→493 lines, 4 new reference files extracted, eval infrastructure (8 tests, 73 assertions), tightened eval grading (numeric ENISA values, labeled flags, arithmetic checks, 72h clock calculations) |
+See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ## License & Disclaimer
 
