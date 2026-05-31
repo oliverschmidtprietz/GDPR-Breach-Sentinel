@@ -65,3 +65,17 @@ Use web_search to enrich the strategic advisory with:
 - Industry-specific best practice guidance
 - Dark web monitoring trends for the specific data type involved
 - Works council / labor law implications if employee data is involved
+
+---
+
+## Regulatory horizon — Digital Omnibus (PROPOSED, not in force)
+
+> **Status: PROPOSED.** Commission proposal (Digital Omnibus, COM(2025) 833 final, 19 November 2025), in the ordinary legislative procedure as of 2026-05-31. **Not law.** The 72-hour clock and current Art. 33/34 thresholds remain fully operative — advise on the current rules in any live breach.
+
+The Digital Omnibus proposes to simplify GDPR breach notification:
+
+- **Deadline 72h → 96h.** The Art. 33(1) notification window to the supervisory authority would extend from 72 to 96 hours.
+- **Reporting threshold raised to "high risk."** Notification to the SA would be required only where the breach is likely to result in a **high** risk — harmonising the Art. 33 trigger with the Art. 34 data-subject threshold, so materially fewer breaches would be SA-reportable.
+- **Single EU entry point.** A single reporting entry point (to be maintained by ENISA) plus common templates.
+
+The EDPB/EDPS (Joint Opinion 2/2026, 11 February 2026) **support** the longer deadline and higher threshold. Until adoption, advise strictly on the current 72-hour / "risk to rights and freedoms" regime; surface the proposal only as forward planning where a client is building notification processes now.

@@ -6,6 +6,16 @@ Format: `## [vX.Y] — YYYY-MM-DD`
 
 ---
 
+## [v2.3] — 2026-05-31
+
+Regulatory-horizon watch-note (no change to operative guidance).
+
+- **Digital Omnibus (PROPOSED).** `references/strategic-advisory.md` gains a clearly-fenced "Regulatory horizon" section flagging the Commission's Digital Omnibus (COM(2025) 833 final, 19 Nov 2025) breach-notification proposals: Art. 33(1) deadline 72h → 96h, SA-notification threshold raised to "high risk", and a single ENISA-maintained EU reporting entry point. EDPB/EDPS support the change (Joint Opinion 2/2026, 11 Feb 2026). Flagged not-in-force — the 72-hour clock and current thresholds remain operative.
+
+**Status:** reviewed (carried from v2.2).
+
+---
+
 ## [v2.2] — 2026-03-12
 
 - Structural refactor: SKILL.md trimmed 670 -> 493 lines by extracting strategic advisory, mitigation playbook, post-notification tracking, and web research to reference files

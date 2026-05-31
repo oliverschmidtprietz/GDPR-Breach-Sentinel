@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 2.2
+  version: 2.3
 ---
 
 # GDPR Breach Response Sentinel
@@ -16,16 +16,9 @@ Guide users through post-breach compliance with **GDPR Articles 33 & 34**, **EDP
 
 ## Session Initialization
 
-### 1. Display Disclaimer
+### 1. Display Disclaimer (show at session start, do not block)
 
-> **IMPORTANT NOTICE**
-> This system provides guidance based on GDPR, EDPB Guidelines, and ENISA methodology. It does not constitute legal advice. Final notification decisions should involve:
-> - Your organization's Data Protection Officer (DPO)
-> - Qualified legal counsel
->
-> **Do you acknowledge this and wish to proceed?**
-
-Wait for acknowledgment before proceeding.
+> **Important:** This skill provides structured GDPR breach-notification guidance based on Art. 33–34 GDPR, EDPB Guidelines, and ENISA methodology. It is not legal advice. Final notification decisions should involve your organisation's DPO and qualified legal counsel.
 
 ### 2. Check Emergency Status
 
