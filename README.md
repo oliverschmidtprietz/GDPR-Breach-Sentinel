@@ -1,13 +1,12 @@
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Agent Skill](https://img.shields.io/badge/Agent_Skill-Open_Standard-orange)](https://agentskills.io)
+# Breach Sentinel — Deployment Guide
 
-# Breach Sentinel
+> 📄 **[View the interactive skill page →](https://oliverschmidtprietz.github.io/GDPR-Breach-Sentinel/)**
 
-**GDPR Breach Response Sentinel** — an [Agent Skill](https://agentskills.io) that provides expert-level Art. 33/34 breach assessment and notification support.
+See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-> **Note:** This is an [Agent Skill](https://agentskills.io) — not a standalone application. It runs inside any compatible AI agent, including Claude Code, Claude.ai, Cursor, VS Code, GitHub Copilot, Gemini CLI, OpenAI Codex, JetBrains Junie, and [many more](https://agentskills.io). The skill extends your agent's capabilities with specialized GDPR breach response knowledge, ENISA severity methodology, and document generation.
+## Overview
 
-## Features
+GDPR Breach Response Sentinel — an advanced incident response skill for Claude that provides:
 
 - **ENISA severity assessment** with borderline score analysis
 - **EDPB case matching** against 18 documented breach scenarios
@@ -20,32 +19,11 @@
 - **Post-notification case tracking**
 - **DPA contractual deadline tracking** for processor scenarios
 
-## Installation
-
-This is an [Agent Skill](https://agentskills.io) compatible with any tool that supports the open Agent Skills standard.
-
-### Claude Code
-
-```bash
-git clone https://github.com/oliverschmidtprietz/GDPR-Breach-Sentinel.git
-cp -r GDPR-Breach-Sentinel/ ~/.claude/skills/user/gdpr-breach-sentinel-oliver-schmidt-prietz/
-```
-
-The skill will auto-activate when you mention data breaches, Art. 33/34, "Datenpanne", or related topics.
-
-### Other Compatible Agents
-
-For Cursor, VS Code, Gemini CLI, OpenAI Codex, JetBrains Junie, and other tools supporting the Agent Skills standard, follow the skill installation instructions for your specific tool. The skill folder structure is portable — just point your agent to the cloned directory.
-
-See [agentskills.io](https://agentskills.io) for a full list of compatible tools and integration guides.
-
 ## File Structure
 
 ```
-GDPR-Breach-Sentinel/
-├── SKILL.md                              # Main skill instructions
-├── CHANGELOG.md                          # Version history
-├── LICENSE                               # AGPL-3.0
+breach-sentinel/
+├── SKILL.md                              # Main skill instructions (deploy this)
 ├── evals/
 │   └── evals.json                        # 8 test cases, 73 assertions
 └── references/
@@ -58,14 +36,30 @@ GDPR-Breach-Sentinel/
     └── web-research.md                   # Search query templates and usage guidance
 ```
 
+## Deployment
+
+### Claude.ai (User Skills)
+
+1. Go to **Settings → Profile → Custom Skills** (or equivalent)
+2. Upload the entire `breach-sentinel/` folder structure
+3. The skill will auto-trigger when you mention data breaches, Art. 33/34, "Datenpanne", or related topics
+
+### Claude Code / Custom MCP Setup
+
+1. Copy the `breach-sentinel/` folder to your skills directory:
+   ```bash
+   cp -r breach-sentinel/ /path/to/your/skills/user/breach-sentinel/
+   ```
+2. Ensure the skill is registered in your configuration
+
 ## Usage
 
 ### Quick Start
 
 Just tell Claude about a breach:
 
-> "We just discovered that an external attacker exfiltrated our customer database.
-> About 2,000 records with names, emails, and payment data. We're based in Munich.
+> "We just discovered that an external attacker exfiltrated our customer database. 
+> About 2,000 records with names, emails, and payment data. We're based in Munich. 
 > This happened yesterday at 3pm."
 
 The skill will activate and walk you through the assessment.
@@ -89,7 +83,7 @@ The skill will activate and walk you through the assessment.
 
 | Feature | Description |
 |---------|-------------|
-| ENISA Severity Calculation | Full SE = (DPC x EI) + CB with contextual adjustments |
+| ENISA Severity Calculation | Full SE = (DPC × EI) + CB with contextual adjustments |
 | Borderline Score Analysis | Extra scrutiny for scores near 2.0/3.0/4.0 thresholds |
 | EDPB Case Matching | Maps to 18 documented scenarios from Guidelines 01/2021 |
 | Strategic Advisory | Senior counsel-level analysis: hidden risks, SA strategy, leverage points |
@@ -112,14 +106,10 @@ The skill will activate and walk you through the assessment.
 | ENISA Severity Methodology | Risk assessment formula and scoring |
 | EU AI Act (Reg. 2024/1689) | Art. 62 serious incident reporting |
 
-See [CHANGELOG.md](CHANGELOG.md) for version history.
-
 ## License & Disclaimer
-
-This project is licensed under the [GNU Affero General Public License v3.0](LICENSE).
 
 This skill provides guidance based on publicly available GDPR regulatory materials. It does not constitute legal advice. All notification decisions should involve qualified legal counsel and your organization's DPO.
 
 ---
 
-*Created by Oliver Schmidt-Prietz — [OneZero Legal](https://onezerolegal.com)*
+*Created by Oliver Schmidt-Prietz — OneZero Legal
