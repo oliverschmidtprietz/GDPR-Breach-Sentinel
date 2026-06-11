@@ -13,8 +13,11 @@ After the initial assessment and notification, the skill supports ongoing case m
 ╠══════════════════════════════════════════════════════════════╣
 ║ SA NOTIFICATION                                              ║
 ║ ☐ Initial notification submitted    Due: [Date] Status: [ ]  ║
+║   Type: [New — Complete / New — Incomplete (phased)]         ║
 ║ ☐ SA acknowledgment received        Status: [ ]              ║
-║ ☐ Supplementary information sent    Due: [Date] Status: [ ]  ║
+║ ☐ Follow-up notification sent       Due: [Date] Status: [ ]  ║
+║   (completing/amending — reference prior notification ID)    ║
+║ ☐ Withdrawal filed (if applicable)  Date: [ ] Reason: [ ]    ║
 ║ ☐ SA inquiry response (if any)      Due: [Date] Status: [ ]  ║
 ╠══════════════════════════════════════════════════════════════╣
 ║ DATA SUBJECT NOTIFICATION                                    ║
