@@ -6,6 +6,15 @@ Format: `## [vX.Y] — YYYY-MM-DD`
 
 ---
 
+## [v3.1] — 2026-07-07
+
+AI Act Art. 73 date re-sync (Omnibus) + canonical name normalization.
+
+- `SKILL.md` Art. 73 check (step 4) and `parallel-regimes.md`: Annex I product-embedded high-risk date corrected to **2 Aug 2028** (was pre-Omnibus 2 Aug 2027); Annex III postponement to **2 Dec 2027** now stated; both now cite the EU-AI-Act-Suite canonical timeline file as the date source.
+- Frontmatter `name:` normalized to **breach-sentinel** (was the lawve.ai slug `gdpr-breach-sentinel-oliver-schmidt-prietz` — the slug is applied at lawve package time, per the pattern used by all sibling skills); `evals/evals.json` skill_name aligned. Sibling cross-references (e.g. privacy-notice-eu) already used `breach-sentinel`.
+
+---
+
 ## [v3.0] — 2026-06-11
 
 EDPB-template-aligned evidence file + AI Act correction + legal-threshold hardening. Triggered by the EDPB's adoption of the *Template [2026] for personal data breach notification* (v1.0, plenary 10 June 2026, public consultation until 5 August 2026) and an external legal review of v2.3.

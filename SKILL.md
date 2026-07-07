@@ -1,11 +1,11 @@
 ---
-name: gdpr-breach-sentinel-oliver-schmidt-prietz
+name: breach-sentinel
 description: |
   Elite incident response and legal compliance guidance for data breaches under GDPR Articles 33 & 34. Use when: (1) User reports a data breach or security incident — including "is this even a personal data breach?" triage, (2) User asks about breach notification obligations or deadlines, (3) User mentions "72 hours", Art. 33, Art. 34, or notification requirements, (4) Discussion involves security incidents affecting personal data, (5) User needs breach risk assessment using ENISA methodology, (6) User mentions "Data Breach" or "Incident" or "Data Leakage" or "Ransomware" or "Exfiltration", (7) User needs to determine Controller vs Processor obligations, (8) Cross-border breach scenarios requiring Lead SA determination, (9) User needs a mitigation playbook or immediate response recommendations, (10) User needs audit-ready breach documentation (.docx) or an EDPB-template-aligned breach notification / evidence file — including follow-up and withdrawal notifications, (11) Breach involves an AI system requiring AI Act Art. 73 serious incident screening.
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 3.0
+  version: 3.1
 ---
 
 # GDPR Breach Response Sentinel
@@ -256,7 +256,7 @@ If the user confirms the breach involves an AI system, perform an additional ass
 1. **Classification:** Is this a **high-risk AI system** (AI Act Annex III, or a product-embedded system under Annex I)? Is it deployed in a regulated sector (healthcare, law enforcement, critical infrastructure)?
 2. **Serious incident test (Art. 3(49)):** Does the incident directly or indirectly lead to (a) the death of a person or serious harm to a person's health; (b) a serious and irreversible disruption of the management or operation of critical infrastructure; (c) an infringement of obligations under Union law intended to protect fundamental rights; or (d) serious harm to property or the environment?
 3. **If yes → Art. 73 reporting:** The **provider** (or, where applicable, the deployer) reports to the **market surveillance authority** of the Member State(s) where the incident occurred — immediately after establishing a causal link between the AI system and the incident (or its reasonable likelihood), and at the latest **15 days** after awareness. Shortened deadlines: **2 days** for widespread infringement or a critical-infrastructure incident under Art. 3(49)(b); **10 days** in the event of death. An initial incomplete report followed by a complete report is permitted.
-4. **Applicability:** Art. 73 applies from **2 August 2026** (high-risk systems embedded in Annex I regulated products: 2 August 2027; sectoral reporting equivalences under Art. 73(9)-(10)). Before the applicable date, state that the duty "will apply from" that date — it is not yet a live obligation.
+4. **Applicability:** Art. 73 applies from **2 August 2026**; note that the underlying high-risk obligations are AI-Omnibus-postponed (Annex III systems: **2 December 2027**; systems embedded in Annex I regulated products: **2 August 2028**; sectoral reporting equivalences under Art. 73(9)-(10)). Before the applicable date, state that the duty "will apply from" that date — it is not yet a live obligation. Canonical date source: the EU-AI-Act-Suite timeline (`ai-act-high-risk/references/ai-omnibus-timeline-postponements.md`).
 5. **Parallel obligations:** Art. 73 runs **in parallel** to GDPR notification — separate obligations, separate recipients, separate deadlines.
 
 Full detail (definitions, deadlines, deferrals): read [references/parallel-regimes.md](references/parallel-regimes.md).
