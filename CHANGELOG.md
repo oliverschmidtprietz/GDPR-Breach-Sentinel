@@ -6,6 +6,18 @@ Format: `## [vX.Y] — YYYY-MM-DD`
 
 ---
 
+## [v3.2] — 2026-07-21
+
+Digital Omnibus instrument-citation correction. Legal-accuracy patch; no change to breach method, thresholds or templates.
+
+- **`references/strategic-advisory.md` — wrong instrument corrected.** The Digital Omnibus proposal was cited as *COM(2025) 833 final*. The Digital Omnibus package of 19 November 2025 is **COM(2025) 836** (Digital Omnibus on AI, 2025/0359(COD)), **COM(2025) 837** (Digital Omnibus Regulation — data, privacy and cybersecurity, 2025/0360(COD), carrying the GDPR amendments in **Article 3**) and **COM(2025) 838** (European Business Wallets). **No Commission proposal bears the number COM(2025) 833** — EUR-Lex has no `52025PC0833`. The regulatory-horizon note now cites COM(2025) 837 final, procedure 2025/0360(COD), with the GDPR amendments pinpointed to Article 3, plus an instrument note recording the correction and the primary-source URL.
+- **Substance unaffected.** The proposed 72h → 96h Art. 33(1) window and the "high risk" reporting threshold were described correctly; only the document identifier was wrong.
+- Verified 2026-07-21 against EUR-Lex (CELEX 52025PC0837) and the European Parliament Legislative Train entry for the digital package; corroborated by `data-subject-rights/sources/verification-log.md` §4.1.
+
+**Status:** reviewed (carried from v3.1).
+
+---
+
 ## [v3.1] — 2026-07-07
 
 AI Act Art. 73 date re-sync (Omnibus) + canonical name normalization.

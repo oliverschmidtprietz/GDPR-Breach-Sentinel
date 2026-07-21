@@ -70,7 +70,9 @@ Use web_search to enrich the strategic advisory with:
 
 ## Regulatory horizon — Digital Omnibus (PROPOSED, not in force)
 
-> **Status: PROPOSED.** Commission proposal (Digital Omnibus, COM(2025) 833 final, 19 November 2025), in the ordinary legislative procedure as of 2026-05-31. **Not law.** The 72-hour clock and current Art. 33/34 thresholds remain fully operative — advise on the current rules in any live breach.
+> **Status: PROPOSED.** Commission proposal (Digital Omnibus Regulation, **COM(2025) 837 final**, 19 November 2025, procedure **2025/0360(COD)**; the GDPR amendments are **Article 3** of that proposal), in the ordinary legislative procedure as of 2026-05-31. **Not law.** The 72-hour clock and current Art. 33/34 thresholds remain fully operative — advise on the current rules in any live breach.
+>
+> *Instrument note (corrected 2026-07-21):* the Digital Omnibus package of 19 November 2025 consists of COM(2025) 836 (Digital Omnibus on AI, 2025/0359(COD)), COM(2025) 837 (Digital Omnibus Regulation — data, privacy and cybersecurity, incl. the GDPR amendments) and COM(2025) 838 (European Business Wallets). There is no COM(2025) 833 in the package; earlier versions of this file cited that number in error. Primary source: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:52025PC0837
 
 The Digital Omnibus proposes to simplify GDPR breach notification:
 
