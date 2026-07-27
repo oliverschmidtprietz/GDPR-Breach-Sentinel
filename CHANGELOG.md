@@ -6,6 +6,17 @@ Format: `## [vX.Y] — YYYY-MM-DD`
 
 ---
 
+## [v3.3] — 2026-07-25
+
+Routes Article 32 security-of-processing work to the `toms-art32` skill. Part of the coordinated **sibling-routing pass** (`ropa` v2.15, `dpia-sentinel` v1.11, `dpa-art28` v1.2, `breach-sentinel` v3.3, `tia` v1.3) that closes the toms-art32 portfolio-integration gate recorded as Finding 1 in `docs/projects/gdpr-skills-marathon/ROADMAP-2026-07-25.md`. Routing pointers only — no Article 32 methodology is duplicated into any sibling.
+
+- **New "Article 32 handoff" subsection** under the Mitigation Playbook. Containment and the Art. 33(3)(d) / Art. 34(3)(b) description of measures taken or proposed stay here; the standing security posture — whether the pre-incident measures were appropriate, which controls change permanently, who owns them, what evidence and retest they need, how the TOM annex to controllers/customers is updated — goes to `toms-art32` (post-incident mode).
+- **Two handover rules.** (1) Never conclude the pre-incident measures were inadequate merely because the breach occurred — Art. 32 requires measures appropriate to the risk, not measures that guarantee no incident; that reassessment is made on the measures' own merits by `toms-art32`. (2) Hand over only what the Evidence Posture marks as established fact; assumptions and unknowns travel labelled as such.
+
+**Status:** reviewed (carried from v3.2) — routing/documentation only; no change to the qualification gate, ENISA scoring, Art. 33/34 bridge, deadlines or document generation.
+
+---
+
 ## [v3.2] — 2026-07-21
 
 Digital Omnibus instrument-citation correction. Legal-accuracy patch; no change to breach method, thresholds or templates.

@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 3.2
+  version: 3.3
 ---
 
 # GDPR Breach Response Sentinel
@@ -360,6 +360,15 @@ Output the SA contact details in the Assessment Dashboard. In **processor-only (
 After the risk assessment, generate a **tailored mitigation playbook** specific to the incident — not a generic checklist but case-driven actions that actually matter for THIS breach.
 
 Read [references/mitigation-playbook.md](references/mitigation-playbook.md) for the full playbook design principles, output format (prioritized action plan with owner/deadline/dependencies), and common action categories to draw from.
+
+### Article 32 handoff (`toms-art32`)
+
+Incident containment and the Art. 33(3)(d) / Art. 34(3)(b) description of measures taken or proposed stay here. The **standing security posture** does not: whether the measures that existed at the time were appropriate under Art. 32(1), which controls change permanently as a result, who owns them, what evidence and retest they need, and how the TOM annex given to controllers or customers must be updated — all of that belongs to the `toms-art32` skill (post-incident mode).
+
+Hand over **verified findings, not verdicts on adequacy**. Two rules:
+
+- **Never conclude that the pre-incident measures were inadequate merely because the breach occurred.** Art. 32 requires measures appropriate to the risk, not measures that guarantee no incident. That reassessment is `toms-art32`'s, made on the measures' own concrete merits.
+- Pass across only what the Evidence Posture marks as **established fact**; working assumptions and material unknowns travel as such, clearly labelled. An unverified assumption that hardens into a permanent control change is how a breach file becomes a liability.
 
 ---
 
