@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 3.3
+  version: 3.5
 ---
 
 # GDPR Breach Response Sentinel
@@ -61,7 +61,7 @@ Offer the user a choice:
 > - **Guided Mode** — I'll walk you through questions one at a time (recommended if unsure)
 > - **Fast Path** — Provide a structured summary of the incident and I'll assess immediately
 
-If user selects **Fast Path**, accept a free-form or structured description and extract **all 11 data points** matching the guided mode questions: (1) Role, (2) Timeline/T0, (3) Breach Type, (4) Data Categories, (5) Subject Count, (6) Identifiers, (7) Encryption, (8) Malicious Intent, (9) Cross-Border, (10) DPA Deadlines, (11) AI System Involvement. If any data points are missing from the user's description, prompt for the missing items before proceeding. Confirm all extracted values before proceeding. Skip to Risk Assessment once confirmed.
+If user selects **Fast Path**, accept a free-form or structured description and extract **all 12 data points** matching the guided mode questions: (1) Role, (2) Timeline/T0, (3) Breach Type, (4) Data Categories, (5) Subject Count, (6) Identifiers, (7) Encryption, (8) Malicious Intent, (9) Cross-Border, (10) DPA Deadlines, (11) AI System Involvement, (12) Free-Text/Special-Category Screen. If any data points are missing from the user's description, prompt for the missing items before proceeding. Confirm all extracted values before proceeding. Skip to Risk Assessment once confirmed.
 
 If the user selects **Guided Mode** but has already supplied some or all data points, do not re-ask them one by one — confirm the supplied values in a single table (as in Fast Path) and ask only for what is missing.
 
@@ -88,6 +88,9 @@ Ask questions **ONE AT A TIME** in this order:
 | 9 | **Cross-Border** | "Are affected individuals in multiple EU Member States? Where is your main establishment?" |
 | 10 | **DPA Deadlines** | "Does your Data Processing Agreement specify a notification window? (Common: 24h or 48h)" |
 | 11 | **AI System** | "Does this breach involve an AI system? (e.g., model leak, adversarial attack, AI-generated output exposure)" |
+| 12 | **Free-Text/Special-Category Screen** | "(1) Which free-text or unstructured inputs did the affected system hold (ticket bodies, chat, call notes, comments, uploads, recordings)? (2) Did any control actually prevent or catch special-category content in them (input filtering, redaction, a review step, trained staff with a check)? A policy alone is not a control. (3) Has special-category content (health, religious or philosophical belief, trade-union membership, sex life or orientation, racial or ethnic origin, political opinion, genetic or biometric data, criminal data) ever been observed in them?" |
+
+**Free-Text/Special-Category Rule:** If such channels accepted input from data subjects or staff and no control caught sensitive content, treat the compromised free text as **potentially containing special-category data** for the Art. 33/34 risk assessment (feed this into the DPC score — see Risk Assessment below — as if Art. 9 data were present, and note observed frequency, if any, in the assessment). A policy or terms-of-use clause telling users not to submit sensitive information is not, by itself, a control that rebuts this.
 
 ### Role Determination (Track Selection)
 
@@ -224,10 +227,25 @@ When a score is within 0.25 of a threshold (2.0 / 3.0 / 4.0), explicitly note th
 | 🔒 ENCRYPTED | Data encrypted, key secure | May support Art. 34(3)(a) exception |
 | 👶 VULNERABLE | Minors, patients | Consider upgrading notification |
 | ⚠️ CROSS-BORDER | Cross-border processing | One-stop-shop analysis (see Cross-Border Rules) |
-| 🇬🇧 UK SUBJECTS | UK residents affected | Separate ICO notification required (see UK note below) |
+| 🇬🇧 UK GDPR APPLICABILITY | UK GDPR applies — UK establishment, OR goods/services offered to people in the UK, OR behaviour in the UK monitored (UK GDPR Art. 3) | Run the UK territorial-scope check below before concluding an ICO notification duty |
 | 🤖 AI SYSTEM | AI system involved | Check AI Act Art. 73 obligations |
 
-**UK GDPR Note:** For UK-resident data subjects, ICO guidance may differ from EDPB recommendations. The UK is not bound by EDPB guidelines — it follows ICO guidance under the UK GDPR and Data Protection Act 2018. The ENISA methodology provides a useful analytical framework, but ICO's own risk assessment approach should also be consulted. Always use the [ICO's self-assessment tool](https://ico.org.uk/for-organisations/report-a-breach/) when available, and note that the ICO has its own notification portal and forms separate from any EU SA.
+**Mere residence or nationality of an affected individual is NOT the UK GDPR test.** A UK resident buying from a Germany-only shop with no UK establishment, no UK offering, and no UK monitoring is outside UK GDPR scope; a visitor physically in the UK whose behaviour is monitored there can be inside it even if they are not a UK resident. Do not raise this flag, and do not conclude an ICO duty, on residence alone.
+
+### UK Territorial-Scope Check (run BEFORE the ICO-notification conclusion, whenever UK-connected individuals are affected)
+
+Ask, in order:
+
+1. **UK establishment?** Is the controller/processor established in the UK (UK GDPR Art. 3(1))?
+2. **Goods/services offered in the UK?** If not established in the UK, does it offer goods or services to data subjects in the UK (Art. 3(2)(a))?
+3. **Behaviour monitored in the UK?** If not established in the UK, does it monitor the behaviour of data subjects taking place in the UK (Art. 3(2)(b))?
+
+**Outcomes:**
+- **All three "No"** → UK GDPR does not apply, even though UK residents (or UK-based individuals) are affected. No ICO notification duty. Record this reasoning explicitly in the assessment — do not silently drop the UK from scope.
+- **Q1 "Yes" (UK establishment exists)** → ICO notification required under UK GDPR Art. 33, within 72h of UK-side awareness. If the controller is established in **both** the EU and the UK, it notifies **both** its EU lead/competent SA **and** the ICO — the UK sits outside the EU one-stop-shop, so EU lead-SA notification does not substitute for ICO notification.
+- **Q1 "No" but Q2 and/or Q3 "Yes" (Art. 3(2) applies)** → UK GDPR applies extraterritorially; ICO notification required under UK GDPR Art. 33, within 72h, even though the controller has no UK establishment.
+
+**UK GDPR Note:** Once the territorial-scope check confirms UK GDPR applies, note that ICO guidance may differ from EDPB recommendations. The UK is not bound by EDPB guidelines — it follows ICO guidance under the UK GDPR and Data Protection Act 2018. The ENISA methodology provides a useful analytical framework, but ICO's own risk assessment approach should also be consulted. Always use the [ICO's self-assessment tool](https://ico.org.uk/for-organisations/report-a-breach/) when available, and note that the ICO has its own notification portal and forms separate from any EU SA.
 
 ---
 
@@ -489,7 +507,7 @@ After completing the assessment, offer to generate **audit-ready .docx documents
 
 ### EDPB Breach Evidence File
 
-On request — and proactively whenever SA notification is required — build the **EDPB-template-aligned breach evidence file**: one document mirroring the numbered structure of the EDPB *Template [2026] for personal data breach notification* (§1 notification info through §7 attachments). Fill every field from the assessment; mark gaps `[UNKNOWN — investigate]` and inapplicable fields `[N/A]`. Always flag the template's **draft / public-consultation status** and that national SA portals remain authoritative until adoption. Read [references/edpb-template-evidence-file.md](references/edpb-template-evidence-file.md) for the field map, fill rules, and document skeleton.
+On request — and proactively whenever SA notification is required — build the **EDPB-template-aligned breach evidence file**: one document mirroring the numbered structure of the EDPB *Template [2026] for personal data breach notification* (§1 notification info through §7 attachments). Fill every field from the assessment; mark gaps `[UNKNOWN — investigate]` and inapplicable fields `[N/A]`. Always flag that the template's **public consultation window closed 5 August 2026 and its final adoption status has not yet been re-verified** — check the EDPB site before relying on it — and that national SA portals remain authoritative. Read [references/edpb-template-evidence-file.md](references/edpb-template-evidence-file.md) for the field map, fill rules, and document skeleton.
 
 ### Document Generation Process
 
@@ -558,9 +576,9 @@ Display:
 8. **Failure to notify is separately sanctionable** — Up to €10M or 2% turnover
 9. **Non-EU controllers: no one-stop-shop** — Notify each relevant SA
 10. **Encryption doesn't erase breach** — Still document internally
-11. **UK is separate** — Requires ICO notification post-Brexit; ICO guidance may differ from EDPB; use ICO's own self-assessment tool and notification portal
+11. **UK is separate, but residence alone doesn't trigger it** — Run the UK territorial-scope check (UK establishment, OR goods/services offered in the UK, OR behaviour monitored in the UK — UK GDPR Art. 3); only then does ICO notification apply, post-Brexit, in parallel to any EU SA notification; ICO guidance may differ from EDPB; use ICO's own self-assessment tool and notification portal
 12. **AI systems have parallel obligations** — AI Act Art. 73 runs alongside GDPR (applies from 2 Aug 2026)
-13. **EDPB Template [2026] is a DRAFT** — Under public consultation until 5 Aug 2026; national SA portals remain authoritative
+13. **EDPB Template [2026] status is unverified** — Its public consultation window closed 5 Aug 2026; final adoption status has not yet been re-verified — check the EDPB site before relying on the template; national SA portals remain authoritative
 14. **Always offer document generation** — Audit-ready .docx files, not just chat output
 15. **Research the specific SA** — Portal URLs and requirements vary significantly
 
@@ -574,6 +592,6 @@ Display:
 | EDPB Guidelines 01/2021 (Examples) | v2.0 | Check for updates via web search |
 | ENISA Severity Methodology | v1.0 | Check for updates via web search |
 | EU AI Act (Regulation 2024/1689) | In force; Art. 73 applies from 2 Aug 2026 | Art. 73 serious incident reporting |
-| EDPB Template [2026] for personal data breach notification | v1.0 DRAFT — public consultation until 5 Aug 2026 | Evidence-file structure; check consultation outcome via web search |
+| EDPB Template [2026] for personal data breach notification | v1.0 — public consultation window closed 5 Aug 2026, final adoption status not yet re-verified | Evidence-file structure; check the EDPB site before relying on the template |
 
 **Important:** Regulatory guidance evolves. The Dynamic Web Research Module should be used in every assessment to check for updates to these foundational documents.

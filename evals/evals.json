@@ -62,7 +62,7 @@
       "expected_output": "LOW severity due to encryption. The AES-256 encryption with separately stored key should bring this to LOW even though device is lost. Should match EDPB Case 10 or 11 (stolen/lost device with encryption) as an analogy. Internal log required but likely no SA notification needed. Should note the caveat about unconfirmed remote wipe in the evidence posture and connect the encryption to the Art. 34(3)(a) exception.",
       "files": [],
       "expectations": [
-        "Extracts all 11 data points from the fast path description without requiring additional guided questions",
+        "Extracts 11 of the 12 fast path data points from the description without requiring additional guided questions, and asks the one remaining item — the Free-Text/Special-Category Screen (data point 12) — since the description only enumerates structured CRM fields (names, emails, phone numbers) and says nothing about free-text or unstructured content in the system",
         "Applies the labeled ENCRYPTED flag and recognizes AES-256 with separately stored key as strong encryption",
         "DPC is stated as numeric value 1 (simple contact data - names, business emails, phone numbers)",
         "EI is stated as a reduced numeric value due to encryption (0.25 or 0.50 - negligible or limited since data is encrypted)",
@@ -186,7 +186,7 @@
     {
       "id": 11,
       "prompt": "We finished your assessment earlier for our breach (ransomware at our logistics company in Vienna, 12,000 customer records with names, addresses and order histories exfiltrated, malicious external attack, T0 was 20 hours ago, controller only, all subjects in Austria, SA notification clearly required, customers will be informed by email next week, police report filed yesterday, we have the ransomware note and our forensic provider's preliminary report). Now please build the full EDPB-template-aligned breach evidence file for our SA notification. I acknowledge the disclaimer.",
-      "expected_output": "Produces the EDPB evidence file mirroring the Template [2026] structure with all seven numbered sections (notification info, controller/reporting person, initial information incl. timeline and nature taxonomy, further information incl. risk assessment, communication to data subjects, other issues incl. police notification and cross-border, attachments). Fields are filled from the facts; gaps marked [UNKNOWN — investigate] or [N/A]. Must flag the template's draft/public-consultation status (until 5 August 2026) and that national SA portals remain authoritative. Should offer .docx rendering.",
+      "expected_output": "Produces the EDPB evidence file mirroring the Template [2026] structure with all seven numbered sections (notification info, controller/reporting person, initial information incl. timeline and nature taxonomy, further information incl. risk assessment, communication to data subjects, other issues incl. police notification and cross-border, attachments). Fields are filled from the facts; gaps marked [UNKNOWN — investigate] or [N/A]. Must flag that the template's public consultation window closed 5 August 2026, that final adoption status has not yet been re-verified, and that national SA portals remain authoritative. Should offer .docx rendering.",
       "files": [],
       "expectations": [
         "Produces a structured evidence file with all seven numbered sections of the EDPB template: §1 notification information, §2 controller and reporting person, §3 initial information, §4 further information, §5 communication to data subjects, §6 other issues, §7 attachments",
@@ -197,7 +197,7 @@
         "§6 records the police/judicial report (filed yesterday) under other authorities notified",
         "§7 contains an attachment inventory including the ransomware note and the forensic provider's report as dated copies",
         "Every template field is either filled from the stated facts, marked [UNKNOWN — investigate], or marked [N/A] with a reason — no fields silently omitted",
-        "Flags the EDPB Template [2026] as a DRAFT under public consultation (until 5 August 2026) and states that national SA portals/forms remain authoritative until adoption",
+        "Flags that the EDPB Template [2026]'s public consultation window closed 5 August 2026 and its final adoption status has not yet been re-verified, and states that national SA portals/forms remain authoritative",
         "Offers to render the evidence file as a .docx document"
       ]
     },

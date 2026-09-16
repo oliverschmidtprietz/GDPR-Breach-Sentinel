@@ -1,6 +1,6 @@
 # EDPB Breach Evidence File — Template [2026] Field Map
 
-> **STATUS — READ FIRST:** This module is based on the EDPB **Template [2026] for personal data breach notification, Version 1.0**, adopted **for public consultation** at the EDPB plenary on 10 June 2026 (document dated 8 June 2026); the consultation runs until **5 August 2026**. Until final adoption it remains a **DRAFT**. National SA notification portals and forms remain authoritative until the template is finally adopted and implemented by the SAs. Source: https://www.edpb.europa.eu/system/files/2026-06/edpb_template_2026_data_breach_notification_v1.0_en.docx — cite the access date whenever the evidence file is generated, and check via web search whether a final version has superseded the draft.
+> **STATUS — READ FIRST:** This module is based on the EDPB **Template [2026] for personal data breach notification, Version 1.0**, adopted **for public consultation** at the EDPB plenary on 10 June 2026 (document dated 8 June 2026). The **public consultation window closed 5 August 2026**; final adoption status has not yet been re-verified — check the EDPB site before treating the template as final. National SA notification portals and forms remain authoritative until the template is finally adopted and implemented by the SAs. Source: https://www.edpb.europa.eu/system/files/2026-06/edpb_template_2026_data_breach_notification_v1.0_en.docx — cite the access date whenever the evidence file is generated, and check via web search whether a final version has superseded the draft.
 
 ## Purpose
 
@@ -15,7 +15,7 @@ The evidence file turns the assessment into a **single, SA-ready dossier** mirro
 2. Respect the template's **conditional logic** (noted per field below): where the visibility logic excludes an **entire branch** for this scenario (e.g., the follow-up/withdrawal fields for a new notification; §6.3 for an EEA-established controller), collapse the branch to a single `[N/A — reason]` line instead of listing each excluded field. Rule 1 governs every field inside the branches that ARE presented.
 3. Where the template offers an enumerated list, pick from the list verbatim and add free-text detail beneath — that keeps the dossier portal-compatible.
 4. The fields marked *(incomplete only)* are options only available when the notification is filed as Incomplete (preliminary, Art. 33(4) phased).
-5. Stamp provenance at the end of the document: `Generated with GDPR Breach Response Sentinel v<X.Y> — <date> — based on EDPB Template [2026] v1.0 (DRAFT under public consultation until 2026-08-05)`. Read the live version number from the SKILL.md metadata; never hard-code it.
+5. Stamp provenance at the end of the document: `Generated with GDPR Breach Response Sentinel v<X.Y> — <date> — based on EDPB Template [2026] v1.0 (public consultation closed 2026-08-05; final adoption status not yet re-verified — check the EDPB site)`. Read the live version number from the SKILL.md metadata; never hard-code it.
 
 ---
 

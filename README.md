@@ -10,7 +10,7 @@ GDPR Breach Response Sentinel — an advanced incident response skill for Claude
 
 - **Breach qualification triage** — "is this even a personal data breach?" gate before the workflow
 - **ENISA severity assessment** with borderline score analysis, bridged to the Art. 33/34 statutory legal tests
-- **EDPB-template-aligned breach evidence file** mirroring the EDPB Template [2026] for breach notification (draft, public consultation)
+- **EDPB-template-aligned breach evidence file** mirroring the EDPB Template [2026] for breach notification (public consultation window closed 5 Aug 2026; final adoption status not yet re-verified — check the EDPB site)
 - **EDPB case matching** against 18 documented breach scenarios (as analogies, with limits stated)
 - **Dedicated Art. 34 decision module** — high-risk test, all three Art. 34(3) exceptions, communication strategy
 - **Strategic case advisory** — senior counsel-level analysis and recommendations
@@ -93,7 +93,7 @@ The skill will activate and walk you through the assessment.
 | Breach Qualification Triage | Gate before the workflow: security incident vs. personal data breach (Art. 4(12)) |
 | ENISA Severity Calculation | Full SE = (DPC × EI) + CB with contextual adjustments — as decision support |
 | Art. 33/34 Legal Bridge | Written bridge from score → facts → safeguards → statutory conclusions in every assessment |
-| EDPB Evidence File | Filled dossier mirroring the EDPB Template [2026] (draft) — all 7 sections, portal-ready |
+| EDPB Evidence File | Filled dossier mirroring the EDPB Template [2026] (public consultation closed 5 Aug 2026, final status not yet re-verified) — all 7 sections, portal-ready |
 | Art. 34 Decision Module | High-risk test, exceptions 34(3)(a)/(b)/(c), communication strategy, decision memo |
 | Evidence Posture | Facts / assumptions / unknowns discipline with confidence level in every assessment |
 | Borderline Score Analysis | Extra scrutiny for scores near 2.0/3.0/4.0 thresholds |
@@ -116,7 +116,7 @@ The skill will activate and walk you through the assessment.
 | GDPR Articles 33 & 34 | Breach notification obligations |
 | EDPB Guidelines 9/2022 v2.0 | Personal data breach notification |
 | EDPB Guidelines 01/2021 v2.0 | Examples regarding breach notification |
-| EDPB Template [2026] v1.0 | Personal data breach notification template — DRAFT, public consultation until 5 Aug 2026 |
+| EDPB Template [2026] v1.0 | Personal data breach notification template — public consultation window closed 5 Aug 2026; final adoption status not yet re-verified, check the EDPB site; national SA portals remain authoritative |
 | ENISA Severity Methodology | Risk assessment formula and scoring |
 | EU AI Act (Reg. 2024/1689) | Art. 73 serious incident reporting (applies from 2 Aug 2026) |
 

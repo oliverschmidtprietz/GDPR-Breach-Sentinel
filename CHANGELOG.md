@@ -6,6 +6,28 @@ Format: `## [vX.Y] — YYYY-MM-DD`
 
 ---
 
+## [v3.5] — 2026-09-15
+
+Two fixes from external review (2026-09-08) and portfolio-wide intake alignment, both confirmed/ruled by the author 2026-09-15.
+
+- **Finding 8 — UK territorial scope corrected.** The routing table's `🇬🇧 UK SUBJECTS` row treated "UK residents affected" as sufficient to trigger a separate ICO notification. It is not: UK GDPR Art. 3 applies where the controller/processor is established in the UK (Art. 3(1)), or offers goods/services to people in the UK, or monitors their behaviour in the UK (Art. 3(2)) — not on the mere residence or nationality of an affected individual (a UK resident buying from a Germany-only shop is outside scope; a UK-based visitor being monitored there can be inside it). Renamed the flag to `🇬🇧 UK GDPR APPLICABILITY`, rewrote its trigger to the Art. 3 test, and added a **UK Territorial-Scope Check** (three yes/no questions on establishment, goods/services offered in the UK, and behaviour monitored in the UK) that runs before any ICO-notification conclusion. All three "No" → no ICO duty even with UK residents affected, and that reasoning must be recorded, not silently dropped. A UK-established controller notifies both its EU lead/competent SA and the ICO — the UK sits outside the one-stop-shop. Updated the UK GDPR Note and Critical Reminder #11 to match. No UK/ICO-specific eval existed to correct.
+- **Portfolio-wide intake addition — free-text/special-category screen.** Added a 12th intake data point (Guided Mode question 12; Fast Path now extracts 12 data points, up from 11) asking what free-text/unstructured inputs the affected system held, whether any control (not merely a policy) actually caught special-category content in them, and whether such content has been observed. New rule: if such channels accepted subject/staff input and no control caught sensitive content, treat the compromised free text as potentially containing special-category data for the Art. 33/34 risk assessment (feeds the DPC score as if Art. 9 data were present) and note observed frequency. Updated `evals/evals.json` eval 4's assertion, which hard-coded "all 11 data points" — its fast-path prompt enumerates only structured CRM fields, so the corrected assertion now expects 11 of 12 to be extracted directly and the 12th (Free-Text/Special-Category Screen) to be asked for.
+
+**Status:** unreviewed. Drift check run: `grep -rn '3\.4' skills/breach-sentinel/ | grep -v CHANGELOG.md` and `grep -rn 'v3\.4\|UK residents' docs/portfolio/generate.py docs/portfolio/skill_pages/breach-sentinel.py` — no stragglers found (see handoff note).
+
+---
+
+## [v3.4] — 2026-08-21
+
+Corrects a stale "ongoing public consultation" framing for the EDPB *Template [2026]* found in the portfolio audit (`AUDIT-2026-08-19.md`, CF-10, CF-11) — the consultation window closed 5 August 2026, and the skill was still asserting it as a present-tense ongoing status in multiple places with no caveat attached at the point of the claim.
+
+- **CF-10:** Reworded every occurrence of the "DRAFT — public consultation until 5 Aug 2026" framing (SKILL.md Critical Reminders, the Version & Regulatory Basis table, the Document Generation section, README.md's feature bullet, feature table, and Regulatory Basis table, and both flagged spots in `references/edpb-template-evidence-file.md`, including the generated-document provenance stamp text) to state plainly: the public consultation window closed 5 August 2026, final adoption status has not yet been re-verified, check the EDPB site before relying on the template, and national SA portals remain authoritative. The caveat is now attached locally at each occurrence, not only in one table.
+- **CF-11:** Applied the same wording correction to `docs/portfolio/skill_pages/breach-sentinel.py`'s Regulatory Basis entry for the EDPB Template [2026], which previously carried the stale claim with no refresh instruction at all. The generated `index.html` itself is regenerated from this source in a later step, not hand-patched here.
+
+**Status:** documentation/wording correction only — no change to the qualification gate, ENISA scoring, Art. 33/34 bridge, deadlines, or document generation logic.
+
+---
+
 ## [v3.3] — 2026-07-25
 
 Routes Article 32 security-of-processing work to the `toms-art32` skill. Part of the coordinated **sibling-routing pass** (`ropa` v2.15, `dpia-sentinel` v1.11, `dpa-art28` v1.2, `breach-sentinel` v3.3, `tia` v1.3) that closes the toms-art32 portfolio-integration gate recorded as Finding 1 in `docs/projects/gdpr-skills-marathon/ROADMAP-2026-07-25.md`. Routing pointers only — no Article 32 methodology is duplicated into any sibling.
